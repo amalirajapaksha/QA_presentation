@@ -1,0 +1,1636 @@
+\documentclass{beamer}
+\usetheme{CambridgeUS}
+\usefonttheme{structurebold}
+\usefonttheme{serif}
+\usefonttheme{professionalfonts}
+\usefonttheme{structureitalicserif}
+
+
+% Required packages
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage[table]{xcolor} 
+\usepackage{booktabs}
+\usepackage{float} 
+\usepackage{colortbl}   
+\usepackage{tcolorbox}
+
+
+% --------- Dark Green + Ash Theme ---------
+\definecolor{darkgreen}{RGB}{0, 70, 120}
+\definecolor{softgreen}{RGB}{200, 210, 220}
+\definecolor{ashgray}{RGB}{240, 240, 240}
+\definecolor{softgray}{RGB}{120, 140, 160}
+\definecolor{navyblue}{RGB}{0, 115, 165} 
+\definecolor{lightblue}{RGB}{220, 235, 245} 
+\definecolor{navyblue1}{RGB}{5, 78, 100} % Header color
+\definecolor{lightblue1}{RGB}{210, 235, 255} % Alternate row color
+\definecolor{purpleBlueLight}{RGB}{224, 224, 255}
+
+% General colors
+\setbeamercolor{palette primary}{fg=black, bg=softgray}
+\setbeamercolor{palette secondary}{fg=darkgreen}
+\setbeamercolor{palette tertiary}{bg=darkgreen, fg=white}
+\setbeamercolor{title}{fg=white,bg=darkgreen}
+\setbeamercolor{normal text}{bg=, fg=black}
+\setbeamercolor{structure}{fg=darkgreen}
+
+% Frame title
+\setbeamercolor{frametitle}{bg=softgreen, fg=darkgreen}
+
+% Blocks
+\setbeamercolor{block title}{bg=darkgreen!25, fg=black}
+\setbeamercolor{block body}{bg=white, fg=black}
+
+% Itemize bullets
+\setbeamerfont{enumerate item}{series=\bfseries} % bold numbers
+\setbeamercolor{enumerate item}{fg=darkgreen}   % change number color
+
+\setbeamerfont{itemize item}{series=\bfseries} % bold bullet
+\setbeamercolor{itemize item}{fg=darkgreen}   % bullet color
+
+
+% Section in TOC
+\setbeamercolor{section in toc}{fg=darkgreen}
+
+% Footer (optional)
+\setbeamercolor{author in head/foot}{bg=darkgreen, fg=white}
+
+% Frame title: bold & upright
+\setbeamerfont{frametitle}{series=\bfseries, shape=\upshape}
+
+\setbeamertemplate{caption}[numbered]
+\setbeamerfont{caption name}{size=\tiny}
+\setbeamerfont{caption}{size=\tiny}
+
+% ------------------------------------------------
+% Document Info
+% ------------------------------------------------
+\title[Control Charts]{\centering Control Charts for $\bar{x}$ and $S$\\
+	\centering \&\\
+	The Shewhart Control Chart for Individual Measurements}
+
+
+\vspace{2cm}
+\author[Group2]{Group 02}
+\institute[Dip. of Statistics]{
+	{Department of Statistics \par}
+	{Faculty of Applied Sciences \par}
+	{University of Sri Jayewardenepura \par}
+	{Nugegoda \par}
+	{Sri Lanka}
+}
+\date[\today]{\today}
+
+% ------------------------------------------------
+% Document Starts
+% ------------------------------------------------
+\begin{document}
+	
+	% Title Page
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+    % Outline
+     \begin{frame}{Outline}
+	    \tableofcontents
+     \end{frame}
+
+    
+    % ------------------------------------------------
+    % Section 1
+    % ------------------------------------------------
+
+	\section{Control Charts for $\bar{x}$ and $s$}
+	\begin{frame}{Control Charts for $\bar{x}$ and $s$}
+	
+		\Large \textit{\textbf{Why $\bar{x}$ and $s$ Charts..?}} 
+		\begin{itemize}
+			\item Directly estimate process standard deviation (s)
+		\end{itemize}
+		
+		\vspace{1cm}
+		
+		\Large \textit{\textbf{Preferable When}} 
+		\begin{itemize}
+			\item Sample size (n) is moderately large (n > 10-12).
+			\item Sample size (n) is variable.
+		\end{itemize}
+	\end{frame}
+	
+	
+	
+	% ------------------------------------------------
+	% Section 1.1
+	% ------------------------------------------------
+	\subsection{Construction and Operation of $\bar{x}$ and $s$ Charts}
+	
+	\begin{frame}{Construction and Operation of $\bar{x}$ and $s$ Charts}
+		\text {Setting up and operating control charts for $\bar{x}$ and $s$ requires about the same sequence of steps as those for and R charts, except that for each sample we must calculate the sample average $\bar{x}$ and the sample standard deviation $s$.}
+		
+		\vspace{0.7cm}
+		\begin{itemize}
+			\item The sample standard deviation is defined as
+			\begin{equation*}
+				s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n - 1}}
+			\end{equation*}
+			
+			\item If the underlying distribution is normal with mean $\mu$ and variance $\sigma$, $\text{E}(s) = c_4 \sigma.$
+			
+			\item The standard deviation of $s$ is given by, $\text{SD}(s) = \sigma \sqrt{1 - c_4^2}.$
+		
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\footnotesize
+		\begin{itemize}
+			\item The three-sigma control limits for $s$ are then,
+			\[
+			\begin{aligned}
+				\text{UCL} &= c_4 \sigma + 3\sigma\sqrt{1 - c_4^{\,2}} \\
+				\text{CL}  &= c_4 \sigma \\
+				\text{LCL} &= c_4 \sigma - 3\sigma\sqrt{1 - c_4^{\,2}}
+			\end{aligned}
+			\]
+		It is customary to define the two constants
+		\begin{equation*}
+			B_5 = c_4 - 3\sqrt{1 - c_4^{\,2}}, 
+			\qquad
+			B_6 = c_4 + 3\sqrt{1 - c_4^{\,2}}.
+		\end{equation*}
+		
+		\vspace{0.5cm}
+		
+		Then the parameters of the $s$ chart with a standard value for $\sigma$ given become,
+		
+		
+	\begin{tcolorbox}[
+		colback=purpleBlueLight,
+		colframe=navyblue,
+		title=\textbf{$s$ Chart Control Limits (when $\sigma$ is known)},
+		fonttitle=\bfseries,
+		coltitle=white,
+		boxrule=0.8pt,
+		arc=3pt
+		]
+		\[
+		\begin{aligned}
+			\text{UCL} &= B_6\sigma\\
+			\text{CL}  &= c_4 \sigma \\
+			\text{LCL} &= B_5 \sigma 
+		\end{aligned}
+		\]
+	\end{tcolorbox}
+			
+			
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\footnotesize
+		\begin{itemize}
+			\item If no standard is given for $\sigma$ itis estimated using $\frac{\bar{s}}{c_4}$,
+			
+			\[
+			\begin{aligned}
+				\text{UCL} &= \bar{s} + 3\frac{\bar{s}}{c_4}\sqrt{1 - c_4^{\,2}} \\
+				\text{CL}  &= \bar{s} \\
+				\text{LCL} &= \bar{s} - 3\frac{\bar{s}}{c_4}\sqrt{1 - c_4^{\,2}}
+			\end{aligned}
+			\]
+			We usually define the constants
+			\begin{equation*}
+				B_3 = 1 - \frac{3}{c_4}\sqrt{1 - c_4^{\,2}}, 
+				\qquad
+				B_4 = 1 + \frac{3}{c_4}\sqrt{1 - c_4^{\,2}}.
+			\end{equation*}
+			
+			\vspace{0.5cm}
+			
+			Then the parameters of the $s$ chart without a standard value for $\sigma$ given become,
+			
+			
+			\begin{tcolorbox}[
+				colback=purpleBlueLight,
+				colframe=navyblue,
+				title=\textbf{$s$ Chart Control Limits (when $\sigma$ is known)},
+				fonttitle=\bfseries,
+				coltitle=white,
+				boxrule=0.8pt,
+				arc=3pt
+				]
+				\[
+				\begin{aligned}
+					\text{UCL} &= B_4 \bar{s}\\
+					\text{CL}  &= \bar{s} \\
+					\text{LCL} &= B_3 \bar{s} 
+				\end{aligned}
+				\]
+			\end{tcolorbox}
+			
+			
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\footnotesize
+		\begin{itemize}
+			\item When $\frac{\bar{s}}{c_4}$ is used to estimate $\sigma$, we may define the control limits on the corresponding $\bar{x}$
+			chart as,
+			
+			\[
+			\begin{aligned}
+				\text{UCL} &= \bar{\bar{x}} + \frac{3 \bar{s}}{c_n \sqrt{n}} \\
+				\text{Center Line} &= \bar{\bar{x}} \\
+				\text{LCL} &= \bar{\bar{x}} - \frac{3 \bar{s}}{c_n \sqrt{n}}
+			\end{aligned}
+			\]
+			Let the constant $A_3 = 3/c_n \sqrt{n}$. 
+			
+			\vspace{0.5cm}
+			
+			Then the $\bar{x}$ chart parameters become,
+			
+			
+			\begin{tcolorbox}[
+			colback=purpleBlueLight,
+				colframe=navyblue,
+				title=\textbf{$\bar{x}$ Chart Control Limits (based on $s$ charts)},
+				fonttitle=\bfseries,
+				coltitle=white,
+				boxrule=0.8pt,
+				arc=3pt
+				]
+				\[
+				\begin{aligned}
+					\text{UCL} &= \bar{\bar{x}} + A_3 \bar{s} \\
+					\text{Center Line} &= \bar{\bar{x}} \\
+					\text{LCL} &= \bar{\bar{x}} -  A_3 \bar{s} 
+				\end{aligned}
+				\]
+			\end{tcolorbox}
+			
+			
+		\end{itemize}
+	\end{frame}
+	
+	% ------------------------------------------------
+	% Section 1.2
+	% ------------------------------------------------
+	\subsection{Example: $\bar{x}$ and $s$ Charts for the Piston Ring Data}
+	
+	\begin{frame}{Example: $\bar{x}$ and $s$ Charts for the Piston Ring Data}
+		\begin{itemize}
+			\item This example shows how to construct and interpret:
+			\begin{itemize}
+				\vspace{0.3cm}
+				\item $\bar{x}$ control chart (for process mean)
+				\vspace{0.3cm}
+				\item $s$ control chart (for process variability)
+			\end{itemize}
+			
+			\vspace{0.5cm}
+			\item The data are obtained from inside diameter measurements of forged automobile engine piston rings.
+			
+			\vspace{0.5cm}
+			\item Each sample (subgroup) consists of five piston rings.
+			
+			\vspace{0.5cm}
+			\item \textbf{Goal:} To determine whether the process is in statistical control.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{table}
+		\centering
+		\caption{\fontsize{5}{6}\selectfont \textbf{Inside Diameter Measurements (mm) for Automobile Engine Piston Rings}}
+		\label{tab:Ring_data}
+		\fontsize{4.5pt}{5pt}\selectfont
+		\resizebox{\textwidth}{!}{ % Scale table to slide width
+			\renewcommand{\arraystretch}{1} % Reduce row height slightly
+			\setlength{\tabcolsep}{3pt} % Reduce column spacing
+			\rowcolors{2}{lightblue1}{white} % Alternating row colors
+			\begin{tabular}{c c c c c c c c}
+				\rowcolor{navyblue1} 
+				\color{white}\textbf{Sample} & \color{white}\textbf{Obs1} & \color{white}\textbf{Obs2} & \color{white}\textbf{Obs3} &\color{white}\textbf{Obs4} & \color{white}\textbf{Obs5} & \color{white}\textbf{$\bar{x}$} & \color{white}\textbf{$s_i$} \\
+				\hline
+				1 & 74.030 & 74.002 & 74.019 & 73.992 & 74.008 & 74.010 & 0.0148 \\
+				2 & 73.995 & 73.992 & 74.001 & 74.011 & 74.004 & 74.001 & 0.0075 \\
+				3 & 73.988 & 74.024 & 74.021 & 74.005 & 74.002 & 74.008 & 0.0147 \\
+				4 & 74.002 & 73.996 & 73.993 & 74.015 & 74.009 & 74.003 & 0.0091 \\
+				5 & 73.992 & 74.007 & 74.015 & 73.989 & 74.014 & 74.003 & 0.0122 \\
+				6 & 74.009 & 73.994 & 73.997 & 73.985 & 73.993 & 73.996 & 0.0087 \\
+				7 & 73.995 & 74.006 & 73.994 & 74.000 & 74.005 & 74.000 & 0.0055 \\
+				8 & 73.985 & 74.003 & 73.993 & 74.015 & 73.988 & 73.997 & 0.0123 \\
+				9 & 74.008 & 73.995 & 74.009 & 74.005 & 74.004 & 74.004 & 0.0055 \\
+				10 & 73.998 & 74.000 & 73.990 & 74.007 & 73.995 & 73.998 & 0.0063 \\
+				11 & 73.994 & 73.998 & 73.994 & 73.995 & 73.990 & 73.994 & 0.0029 \\
+				12 & 74.004 & 74.000 & 74.007 & 74.000 & 73.996 & 74.001 & 0.0042 \\
+				13 & 73.983 & 74.002 & 73.998 & 73.997 & 74.012 & 73.998 & 0.0105 \\
+				14 & 74.006 & 73.967 & 73.994 & 74.000 & 73.984 & 73.990 & 0.0153 \\
+				15 & 74.012 & 74.014 & 73.998 & 73.999 & 74.007 & 74.006 & 0.0073 \\
+				16 & 74.000 & 73.984 & 74.005 & 73.998 & 73.996 & 73.997 & 0.0078 \\
+				17 & 73.994 & 74.012 & 73.986 & 74.005 & 74.007 & 74.001 & 0.0106 \\
+				18 & 74.006 & 74.010 & 74.018 & 74.003 & 74.000 & 74.007 & 0.0070 \\
+				19 & 73.984 & 74.002 & 74.003 & 74.005 & 73.997 & 73.998 & 0.0085 \\
+				20 & 74.000 & 74.010 & 74.013 & 74.020 & 74.003 & 74.009 & 0.0080 \\
+				21 & 73.982 & 74.001 & 74.015 & 74.005 & 73.996 & 74.000 & 0.0122 \\
+				22 & 74.004 & 73.999 & 73.990 & 74.006 & 74.009 & 74.002 & 0.0074 \\
+				23 & 74.010 & 73.989 & 73.990 & 74.009 & 74.014 & 74.002 & 0.0119 \\
+				24 & 74.015 & 74.008 & 73.993 & 74.000 & 74.010 & 74.005 & 0.0087 \\
+				25 & 73.982 & 73.984 & 73.995 & 74.017 & 74.013 & 73.998 & 0.0162 \\
+				\hline
+				\rowcolor{blue!25} 
+				 &  &  &  &  & &$\bar{\bar{x}} = 74.001$ & $\bar{s} = 0.009$ \\
+				 \hline
+			\end{tabular}
+		}
+	\end{table}
+	\end{frame}
+	
+	\begin{frame}
+		\centering  \textbf{\underline{Phase І – Control Limits}
+			\vspace{0.8cm}}
+		
+		\begin{itemize}
+			\item The grand average and the average standard deviation are:
+			 \[
+			 \bar{\bar{x}} = \frac{1}{25}\sum_{i=1}^{25} \bar{x}_i
+			 = \frac{1}{25}(1850.028) = 74.001
+			 \]
+			 
+			 \[
+			 \bar{s} = \frac{1}{25}\sum_{i=1}^{25} s_i
+			 = \frac{1}{25}(0.2351) = 0.0094
+			 \]
+		
+		\vspace{0.5cm}
+		\item Consequently, the parameters are:
+		
+		\begin{columns}[T] 
+			
+			% ---------------- LEFT COLUMN ----------------
+			\begin{column}{0.35\textwidth}
+				\footnotesize
+				\textbf{$\bar{x}$ Chart:}
+				
+				\vspace{0.2cm}
+				
+				\[
+				\begin{aligned}
+					\text{UCL} &= \bar{\bar{x}} + A_3 \bar{\bar{x}} = 74.014 \\
+					\text{CL}  &= \bar{x} = 74.001 \\
+					\text{LCL} &= \bar{\bar{x}} - A_3 \bar{s} = 73.988
+				\end{aligned}
+				\]
+			\end{column}
+			
+			% ---------------- VERTICAL LINE ----------------
+			\begin{column}{0.02\textwidth}
+				\vspace{-0.05cm} % adjust to match column height
+				\color{black}\rule{0.5pt}{4cm} % vertical line thickness & height
+			\end{column}
+			
+			% ---------------- RIGHT COLUMN ----------------
+			\begin{column}{0.35\textwidth}
+				\footnotesize
+				\textbf{$s$ Chart:}
+				
+				\vspace{0.05cm}
+				
+				
+				\[
+				\begin{aligned}
+					\text{UCL} &= B_4 \bar{s} = 0.0196 \\
+					\text{CL}  &= \bar{s} = 0.0094 \\
+					\text{LCL} &= B_3 \bar{s} = 0
+				\end{aligned}
+				\]
+			\end{column}
+   \end{columns}
+\end{itemize}	
+\end{frame}
+	
+	\begin{frame}
+		\centering  \textbf{\underline{Control Charts}}
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.45\linewidth]{Rplot.png}
+			\caption{$\bar{x} \& s$ charts for ring data}
+			\label{fig:xbar_s_chart}
+		\end{figure}
+		
+		\begin{itemize}
+			\item There is no indication that the process is out of control, so those limits could be adopted to phase ІІ monitoring of the process
+		\end{itemize}
+		
+	\end{frame}
+	
+	
+	\begin{frame}
+		\centering  \textbf{\underline{Estimation of Process Standard Deviation}
+			\vspace{0.8cm}}
+		\begin{itemize}
+			\item $s/c_4$ is an unbiased estimator of the process standard deviation $\sigma$.
+			
+			\vspace{1cm}
+			\item For sample size $n = 5$, $c_4 = 0.9400$.
+			
+			\vspace{1cm}
+			\item Therefore, our estimate of the process standard deviation is:
+			\[
+			\hat{\sigma} = \frac{\bar{s}}{c_4} = \frac{0.0094}{0.9400} = 0.01
+			\]
+		\end{itemize}	
+	\end{frame}
+	
+	% ------------------------------------------------
+	% Section 1.3
+	% ------------------------------------------------
+	\subsection{The $\bar{x}$ and $s$ Control Charts with Variable Sample Size}
+	
+	\begin{frame}{The $\bar{x}$ and $s$ Control Charts with Variable Sample Size}
+		\begin{columns}[T] 
+			
+			% ---------------- LEFT COLUMN ----------------
+			\begin{column}{0.30\textwidth}
+				\footnotesize
+				\textbf{Weighted Mean for $\bar{x}$ Chart
+				}
+				
+				\vspace{0.05cm}
+				
+				
+				Center Line of $\bar{x}$ Chart
+				
+				
+				\[
+				\bar{\bar{x}} = \frac{\sum_{i=1}^{m} n_i \bar{x}_i}{\sum_{i=1}^{m} n_i}
+				\]
+				
+				
+				
+				
+				
+				\vspace{0.2cm}
+				
+				\begin{block}{Definitions}
+					\begin{itemize}
+						\item $n_i$ = Sample size of $i$th subgroup
+						\item $\bar{x}_i$ = Mean of $i$th subgroup
+					\end{itemize}
+				\end{block}
+				
+			\end{column}
+			
+			% ---------------- VERTICAL LINE ----------------
+			\begin{column}{0.02\textwidth}
+				\vspace{-0.05cm} % adjust to match column height
+				\color{black}\rule{0.5pt}{6cm} % vertical line thickness & height
+			\end{column}
+			
+			% ---------------- RIGHT COLUMN ----------------
+			\begin{column}{0.30\textwidth}
+				\footnotesize
+				\textbf{Weighted Standard Deviation for $s$ Chart
+				}
+				
+				\vspace{0.05cm}
+				
+				
+				Center Line of $s$ Chart
+				
+				
+				
+				\[
+				\bar{s} = \left[ \frac{\sum_{i=1}^{m} (n_i - 1)s_i^2}{\sum_{i=1}^{m} n_i - m} \right]^{1/2}
+				\]
+				
+				
+				
+				
+				\vspace{0.2cm}
+				
+				\begin{block}{Definitions}
+					\begin{itemize}
+						\item $n_i$ = Sample size of $i$th subgroup
+						\item $s_i$ = Standard deviation of $i$th subgroup
+					\end{itemize}
+				\end{block}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{columns}[T] 
+			
+			% ---------------- LEFT COLUMN ----------------
+			\begin{column}{0.30\textwidth}
+				\footnotesize
+				\textbf{Control Limits for $\bar{x}$  Chart
+				}
+				
+				\vspace{0.05cm}
+				
+				\[
+				\begin{aligned}
+					\text{UCL} &= \bar{\bar{x}} + A_3 \bar{s} \\
+					\text{Center Line} &= \bar{\bar{x}} \\
+					\text{LCL} &= \bar{\bar{x}} -  A_3 \bar{s} 
+				\end{aligned}
+				\]
+				
+			\end{column}
+			
+			% ---------------- VERTICAL LINE ----------------
+			\begin{column}{0.02\textwidth}
+				\vspace{-0.05cm} % adjust to match column height
+				\color{black}\rule{0.5pt}{3cm} % vertical line thickness & height
+			\end{column}
+			
+			% ---------------- RIGHT COLUMN ----------------
+			\begin{column}{0.35\textwidth}
+				\footnotesize
+				\textbf{Control Limits for $s$ Chart
+				}
+				
+				\vspace{0.05cm}
+				
+					\[
+				\begin{aligned}
+					\text{UCL} &= B_4 \bar{s}\\
+					\text{CL}  &= \bar{s} \\
+					\text{LCL} &= B_3 \bar{s} 
+				\end{aligned}
+				\]
+				
+				
+				\tiny
+				\hspace{-0.5cm}\begin{equation*}
+					B_3 = 1 - \frac{3}{c_4}\sqrt{1 - c_4^{\,2}}, 
+					\qquad
+					B_4 = 1 + \frac{3}{c_4}\sqrt{1 - c_4^{\,2}}
+				\end{equation*}
+			\end{column}
+		\end{columns}
+		
+		\vspace{1cm}
+		\begin{itemize}
+			\item These constants  ( $A_3, B_3, B_4$ ) change for each samples. 
+			\vspace{0.5cm}
+			\item We can use average sample size to calculate CL.
+			\vspace{0.5cm}
+			\item If average sample size value is a decimal number, we can use most common sample size to calculations. 
+			
+		\end{itemize}
+	\end{frame}
+	
+	% ------------------------------------------------
+	% Section 1.4
+	% ------------------------------------------------
+	\subsection{Example: \text{$\bar{x}$ and $s$} Charts, Variable Sample Size}
+	
+	\begin{frame}{Example: $\bar{x}$ and $s$ Charts for the Piston Rings, Variable Sample Size}
+		\begin{table}[h]
+			\centering
+			\caption{\fontsize{5.5}{6.5}\selectfont \textbf{Inside Diameter Measurements (mm) on Automobile Engine Piston Rings}}
+			\label{tab:Ring_data}
+			\fontsize{5.5pt}{6.5pt}\selectfont
+			\setlength{\tabcolsep}{4pt}
+			\renewcommand{\arraystretch}{1}
+			\rowcolors{2}{lightblue}{white}
+			\begin{tabular}{c c c c c c c c}
+				\hline
+				\rowcolor{navyblue}
+				\color{white}\textbf{Sample} & \color{white}\textbf{Obs1} & \color{white}\textbf{Obs2} & \color{white}\textbf{Obs3} & \color{white}\textbf{Obs4} & \color{white}\textbf{Obs5} &  \color{white} $\bar{x}_i$ & \color{white} $s_i$ \\
+				\hline
+				1  & 74.030 & 74.002 & 74.019 & 73.992 & 74.008 & 74.010 & 0.0148 \\
+				2  & 73.995 & 73.992 & 74.001 & 73.996 &        & 74.001 & 0.0046 \\
+				3  & 73.988 & 74.024 & 74.021 & 74.005 & 74.002 & 74.008 & 0.0147 \\
+				4  & 74.002 & 73.996 & 73.993 & 74.015 & 74.009 & 74.003 & 0.0091 \\
+				5  & 73.992 & 74.007 & 74.015 & 73.989 & 74.014 & 74.003 & 0.0122 \\
+				6  & 74.009 & 73.994 & 73.997 & 73.985 &        & 73.996 & 0.0099 \\
+				7  & 73.995 & 74.006 & 73.994 & 74.000 &        & 73.999 & 0.0055 \\
+				8  & 73.985 & 74.003 & 73.993 & 74.015 & 73.988 & 73.997 & 0.0123 \\
+				9  & 74.008 & 73.995 & 74.009 & 74.005 &        & 74.004 & 0.0064 \\
+				10 & 73.998 & 74.000 & 73.990 & 74.007 & 73.995 & 73.998 & 0.0063 \\
+				11 & 73.994 & 73.998 & 73.994 & 73.995 & 73.990 & 73.994 & 0.0029 \\
+				12 & 74.004 & 74.000 & 74.007 & 74.000 & 73.996 & 74.001 & 0.0042 \\
+				13 & 73.983 & 74.002 & 73.998 &        &        & 73.994 & 0.0100 \\
+				14 & 74.006 & 73.967 & 73.994 & 74.000 & 73.984 & 73.990 & 0.0153 \\
+				15 & 74.012 & 74.014 & 73.998 &        &        & 74.008 & 0.0087 \\
+				16 & 74.000 & 73.984 & 74.005 & 73.998 & 73.996 & 73.997 & 0.0078 \\
+				17 & 73.994 & 74.012 & 73.986 & 74.005 &        & 73.999 & 0.0115 \\
+				18 & 74.006 & 74.010 & 74.018 & 74.003 & 74.000 & 74.007 & 0.0070 \\
+				19 & 73.984 & 74.002 & 74.003 & 74.005 & 73.997 & 73.998 & 0.0085 \\
+				20 & 74.000 & 74.010 & 74.013 &        &        & 74.008 & 0.0068 \\
+				21 & 73.982 & 74.001 & 74.015 & 74.005 & 73.996 & 74.000 & 0.0122 \\
+				22 & 74.004 & 73.999 & 73.990 & 74.006 & 74.009 & 74.002 & 0.0074 \\
+				23 & 74.010 & 73.989 & 73.990 & 74.009 & 74.014 & 74.002 & 0.0119 \\
+				24 & 74.015 & 74.008 & 73.993 & 74.000 & 74.010 & 74.005 & 0.0087 \\
+				25 & 73.982 & 73.984 & 73.995 & 74.017 & 74.013 & 73.998 & 0.0162 \\
+				\hline
+			\end{tabular}
+		\end{table}
+		
+	\end{frame}
+	
+	\begin{frame}
+		
+		
+		\[
+		\bar{x} = \frac{\sum_{i=1}^{25} n_i \bar{x}_i}{\sum_{i=1}^{25} n_i} 
+		= \frac{5(74.010) + 3(73.996) + \cdots + 5(73.998)}{5 + 3 + \cdots + 5}
+		\]
+		
+		
+		\[
+		= \frac{8362.075}{113} = 74.001
+		\]
+		
+		
+		\[
+		s = \left[ \frac{\sum_{n=1}^{25} (n_i - 1)s_i^2}{\sum_{n=1}^{25} n_i - 25} \right]^{1/2} 
+		= \left[ \frac{4(0.0148)^2 + 2(0.0046)^2 + \cdots + 4(0.0162)^2}{5 + 3 + \cdots + 5 - 25} \right]^{1/2} \]
+		
+		\[
+		= \left[ \frac{0.009324}{88} \right]^{1/2} 
+		= 0.0103
+		\]
+				
+	\end{frame}
+	
+	
+	\begin{frame}
+	   Control limits for x-bar chart
+	   
+	   \[
+	   \begin{aligned}
+	   \text{UCL} &= 74.001 + 1.427 \times 0.0103 = 74.016 \\
+	   \text{CL} &= 74.001 \\
+	   \text{LCL} &= 74.001 - 1.427 \times 0.0103 = 73.986
+	   \end{aligned}
+	   \]
+	   
+\vspace{1cm}
+	   
+	   Control limits for s chart
+	   
+	   \[
+	   \begin{aligned}
+	   	\text{UCL} &= 2.089 \times 0.0103 = 0.022 \\
+	   	\text{CL} &= 0.0103 \\
+	   	\text{LCL} &= 0 \times 0.0103 = 0
+	   \end{aligned}
+	   \]
+	  \end{frame} 
+	   
+	   
+	   
+	   
+	\begin{frame}[fragile]
+		\centering
+		\textbf{\underline{Control charts for piston-ring data with variable sample size}}
+		
+
+		\vspace{0.5cm}
+		
+		\begin{columns}[T]
+			
+			% ---------------- LEFT GRAPH ----------------
+			\begin{column}{0.48\textwidth}
+				\footnotesize
+				\includegraphics[width=\linewidth]{picture11.png}
+				\captionof{figure}{$\bar{x}$ chart for variable sample sizes}
+				\label{fig:x_chart_variable}
+			\end{column}
+			
+			% ---------------- RIGHT GRAPH ----------------
+			\begin{column}{0.48\textwidth}
+				\footnotesize
+				\includegraphics[width=\linewidth]{picture2.png}
+				\captionof{figure}{$s$chart for variable sample sizes}
+				\label{fig:s_chart_variable}
+			\end{column}
+			
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	
+	\begin{frame}
+		\begin{table}[h]
+			\centering
+			\caption{\fontsize{5}{6}\selectfont \textbf{Inside Diameter Measurements (mm) on Automobile Engine Piston Rings}}
+			\label{tab:Ring_data}
+			\fontsize{5.5pt}{6.5pt}\selectfont
+			\setlength{\tabcolsep}{4pt}
+			\renewcommand{\arraystretch}{1.15}
+			\rowcolors{2}{blue!10}{white}
+			
+			\begin{tabular}{c c c c c c c c c c c}
+				\rowcolor{blue!60}
+				\color{white}\textbf{Sample} &
+				\color{white}\textbf{$n$} &
+				\color{white}\textbf{$\bar{x}$} &
+				\color{white}\textbf{$s$} &
+				\color{white}\textbf{$A_3$} &
+				\color{white}\textbf{LCL$_\bar{x}$} &
+				\color{white}\textbf{UCL$_\bar{x}$} &
+				\color{white}\textbf{$B_3$} &
+				\color{white}\textbf{$B_4$} &
+				\color{white}\textbf{LCL$_s$} &
+				\color{white}\textbf{UCL$_s$} \\
+				\hline
+				
+				1  & 5 & 74.010 & 0.0148 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				2  & 3 & 73.996 & 0.0046 & 1.954 & 73.981 & 74.021 & 0 & 2.568 & 0 & 0.026 \\
+				3  & 5 & 74.008 & 0.0147 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				4  & 5 & 74.003 & 0.0091 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				5  & 5 & 74.003 & 0.0122 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				6  & 4 & 73.996 & 0.0099 & 1.628 & 73.984 & 74.018 & 0 & 2.266 & 0 & 0.023 \\
+				7  & 4 & 73.999 & 0.0055 & 1.628 & 73.984 & 74.018 & 0 & 2.266 & 0 & 0.023 \\
+				8  & 5 & 73.997 & 0.0123 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				9  & 4 & 74.004 & 0.0064 & 1.628 & 73.984 & 74.018 & 0 & 2.266 & 0 & 0.023 \\
+				10 & 5 & 73.998 & 0.0063 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				11 & 5 & 73.994 & 0.0029 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				12 & 5 & 74.001 & 0.0042 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				13 & 3 & 73.994 & 0.0100 & 1.954 & 73.981 & 74.021 & 0 & 2.568 & 0 & 0.026 \\
+				14 & 5 & 73.990 & 0.0153 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				15 & 3 & 74.008 & 0.0087 & 1.954 & 73.981 & 74.021 & 0 & 2.568 & 0 & 0.026 \\
+				16 & 5 & 73.997 & 0.0078 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				17 & 4 & 73.999 & 0.0115 & 1.628 & 73.984 & 74.018 & 0 & 2.226 & 0 & 0.023 \\
+				18 & 5 & 74.007 & 0.0070 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				19 & 5 & 73.998 & 0.0085 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				20 & 3 & 74.008 & 0.0068 & 1.954 & 73.981 & 74.021 & 0 & 2.568 & 0 & 0.026 \\
+				21 & 5 & 74.000 & 0.0122 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				22 & 5 & 74.002 & 0.0074 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				23 & 5 & 74.002 & 0.0119 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				24 & 5 & 74.005 & 0.0087 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				25 & 5 & 73.998 & 0.0162 & 1.427 & 73.986 & 74.016 & 0 & 2.089 & 0 & 0.022 \\
+				
+			\end{tabular}
+		\end{table}
+		
+	\end{frame}
+	
+	\begin{frame}
+		\centering
+		\textbf{\underline{Estimation of $\sigma$}}
+		
+		\vspace{0.5cm}
+		
+		\begin{itemize}
+			\item First, average all the values of $s_i$ for which $n_i$=5 (the most frequently occurring value of $n_i$). This gives,
+			
+			
+			
+			\[
+			\begin{aligned}
+				\bar{s} &= \frac{\sum_{i=1}^{N} s_i}{N} \\
+				\bar{s} &= \frac{0.1715}{17} = 0.0101
+			\end{aligned}
+			\]
+			
+			
+			
+			
+			N – number of samples with same (model) sample size
+			
+			\vspace{0.5cm}
+			\item The estimate of the process $\sigma$ is then
+			
+			\[
+			\hat{\sigma} = \frac{\bar{s}}{c_4} = \frac{0.0101}{0.9400} = 0.01
+			\]
+			
+			where the value of $c_4$ (correction factor ) used is for samples of size n=5.
+			
+			
+			
+		\end{itemize}
+	\end{frame}
+	
+	% ------------------------------------------------
+	% Section 1.5
+	% ------------------------------------------------
+	\subsection{The $s^2$ Control Chart}
+	
+	\begin{frame}{The $s^2$ Control Chart}
+		\begin{itemize}
+			\item Engineers use the R chart or the S chart to monitor process variability.
+			
+			\vspace{0.5cm} 
+			\item The S chart is better than the R chart when the sample size is medium or large.
+			 
+			\vspace{0.5cm} 
+			\item Some people prefer a chart based directly on the sample variance, called the $s^2$ control chart.
+		\end{itemize}
+		
+	\end{frame}
+	
+	
+	% ------------------------------------------------
+	% Section 1.6
+	% ------------------------------------------------
+	\subsection{Construction of $s^2$ Chart}
+	
+	\begin{frame}{Construction of $s^2$ Chart}
+		\footnotesize
+	\begin{itemize}
+		\item Suppose that a quality characteristic is normally distributed with mean $\mu$ and standard deviation $\sigma$, where both $\mu$ and $\sigma$ are known. If $x_{1}, x_{2}, . . . , x_{n}$ is a sample of size n, then the variance of this sample is,
+		\[
+		S^2 = \frac{1}{n-1} \sum_{i=1}^{n} (X_i - \bar{X})^2
+		\]
+		
+		\vspace{0.2cm}
+		\item Then we know,
+		\vspace{0.1cm}
+		
+		\hspace{2cm}$\displaystyle
+		\frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}
+		$
+		
+		\vspace{0.5cm}
+		\item Based on these information we have the probability statement,
+		\[
+		P\left( 
+		\chi^{2}_{1-\alpha/2,\;n-1}
+		\;\le\;
+		\frac{(n-1)S^{2}}{\sigma^{2}}
+		\;\le\;
+		\chi^{2}_{\alpha/2,\;n-1}
+		\right)
+		= 1 - \alpha
+		\]
+	\end{itemize}	
+		
+	\end{frame}
+	
+	\begin{frame}
+	 \begin{itemize}
+	 	\item By simplifying,
+	 	\[
+	 	P\left( 
+	 	\chi^{2}_{1-\alpha/2,\;n-1}
+	 	\;\le\;
+	 	\frac{(n-1)S^{2}}{\sigma^{2}}
+	 	\;\le\;
+	 	\chi^{2}_{\alpha/2,\;n-1}
+	 	\right)
+	 	= 1 - \alpha
+	 	\]
+	 	
+	 	\[
+	 	P\left( 
+	 	\frac{\sigma^2}{(n-1)} \chi^2_{1-\alpha/2,\,n-1} \le S^2 \le \frac{\sigma^2}{(n-1)} \chi^2_{\alpha/2,\,n-1}
+	 	\right) = 1-\alpha
+	 	\]
+	
+	
+ 	
+	 	\item According to that final control limit formulas for $s^2$ charts are,
+	 	\begin{tcolorbox}[colback=lightblue, colframe=navyblue, title=$s^2$ Chart Control Limits (when $\sigma$ is known), coltitle=white, fonttitle=\bfseries]
+	 	\begin{align*}
+	 		\text{UCL} \;&=\; \frac{\sigma^2}{(n-1)} \,\chi^2_{\alpha/2,\,n-1}\\
+	 		\text{Center Line} \;&=\; \sigma^2 \\
+	 		\text{LCL} \;&=\; \frac{\sigma^2}{(n-1)} \,\chi^2_{1-\alpha/2,\,n-1} 
+	 	\end{align*}
+	 	\end{tcolorbox}
+	 \end{itemize}
+
+	\end{frame}
+	
+	\begin{frame}
+		\begin{itemize}
+			\item Since most of the time the true variance $\sigma^2$ is unknown, it is estimated using average sample variance $\bar{s}^2$.
+			
+			\vspace{0.4cm}
+			\item Then the control limit formulas for  $s^2$ charts are,
+			\begin{tcolorbox}[colback=lightblue, colframe=navyblue, title=$s^2$ Chart Control Limits (when $\sigma$ is unknown), coltitle=white, fonttitle=\bfseries]
+				\begin{align*}
+					\text{UCL} \;&=\; \frac{\bar{s}^2}{(n-1)} \,\chi^2_{\alpha/2,\,n-1}\\
+					\text{Center Line} \;&=\; \bar{s}^2 \\
+					\text{LCL} \;&=\; \frac{\bar{s}^2}{(n-1)} \,\chi^2_{1-\alpha/2,\,n-1} 
+				\end{align*}
+			\end{tcolorbox}
+		
+			\vspace{0.4cm}
+		\item Note that this control chart is defined with probability
+		limits.	
+			
+	    \end{itemize}	
+	\end{frame}
+	
+	\subsection{Example: $s^2$ Chart for the Piston Ring Data}
+	\begin{frame}{Example: $s^2$ Chart for the Piston Ring Data}
+		\begin{itemize}
+			\item For the above piston ring data average sample variance is,
+			\[
+			\bar{s}^2 = \frac{1}{25} \sum_{i=1}^{25} s^2_i = \frac{1}{25} 0.0025129 = 0.000101
+			\]
+			
+			\item Then control limits for the  $s^2$ chart at 0.0027 significance level are,
+			\begin{align*}
+				\text{UCL} \;&=\; \frac{0.000101}{4} \,\chi^2_{0.00135,\,4}\;&=\; 0.000447 \\
+				\text{Center Line} \;&=\; \bar{s}^2 \;&=\; 0.000101\\
+				\text{LCL} \;&=\; \frac{0.000101}{4} \,\chi^2_{0.99865,\,4} \;&=\; 0.000003 
+			\end{align*}
+			
+			
+		\end{itemize}
+	\end{frame}
+	
+	
+	
+		\begin{frame}
+		\centering  \textbf{ \underline{$s^2$ Chart for Phase I data}}
+		\vspace{0.2cm}
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7\linewidth]{picture7.png}
+			\caption{$s^2$ control chart for ring data}
+			\label{fig:s2_chart}
+		\end{figure}
+		
+		\begin{itemize}
+			\item The $s^2$ chart for the sample data shows no unusual signals. 
+		\end{itemize}
+	\end{frame}
+	
+	 % ------------------------------------------------
+	% Section 2
+	% ------------------------------------------------
+	
+	\section{The Shewhart Control Chart for Individual Measurements}
+	\begin{frame}{The Shewhart Control Chart for Individual Measurements}
+		\Large \textit{\textbf{When..?}}
+		\footnotesize
+		\begin{itemize}
+			\item A Shewhart control chart for individual measurements is used when the sample size is 1 
+			($n = 1$), meaning each data point comes from a single unit rather than a group.
+			
+			\vspace{0.2cm}
+			\item This happens in situations like:
+			
+			\footnotesize
+			\begin{itemize}
+				\item Every unit is measured individually (e.g., automated inspection) and there’s no natural way to make groups.
+				\item Data comes slowly, so it’s not practical to wait for multiple items to form a sample.
+			\end{itemize}
+			
+			\vspace{0.2cm}
+			\item In these cases, using an individual measurement chart helps monitor the process and detect any unusual variation, even when we can’t form larger samples.
+			
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\centering  \textbf{\underline{Moving Range Control Chart}
+		\vspace{0.8cm}}
+		
+		\begin{itemize}
+			\item In a control chart for individual measurements, process variability is often estimated using the \textbf{moving range} of \textbf{two successive observations}.
+			
+			\vspace{0.5cm}
+			\item The moving range is defined as:
+			\[
+			MR_i = |x_i - x_{i-1}|
+			\]
+			
+			\vspace{0.5cm}
+			\item A \textbf{moving range control chart} can be created using these MR values.
+			
+			\vspace{0.5cm}
+			\item The procedure is illustrated in
+			the following example.
+		\end{itemize}
+	\end{frame}
+	
+	% ------------------------------------------------
+	% Section 2.1
+	% ------------------------------------------------
+	\subsection{Example: Loan Processing Costs }
+	
+	\begin{frame}{Example: Loan Processing Costs}
+		\begin{itemize}
+			\item \textbf{Scenario:} A bank mortgage unit is monitoring the average weekly cost of processing loan applications.
+			
+			\vspace{0.3cm}
+			
+			\item\textbf{Variable:} Average weekly loan processing cost
+			
+			\[
+			\text{Average cost} = \frac{\text{Total weekly cost}}{\text{Number of loans processed}}
+			\]
+			
+			\vspace{0.3cm}
+			
+			\item\textbf{Data:} Weekly average costs for the most recent 40 weeks
+			
+			\vspace{0.3cm}
+			
+			\item\textbf{Goal:} Determine whether the process is in statistical control using:
+			\begin{enumerate}
+				\item Individuals Control Chart
+				\item Moving Range Control Chart
+			\end{enumerate}
+		\end{itemize}
+	\end{frame}
+	
+
+	\begin{frame}
+		\begin{table}[h!]
+			\centering
+			\caption{\fontsize{6}{8}\selectfont \textbf{Cost of Processing Mortgage Loan Applications (Complete dataset contains 40 weeks. Refer to table 6.7 Montgomery (2019), Statistical Quality Control)
+			}}
+			\label{tab:mortgage_costs}
+			
+			\scriptsize
+			\renewcommand{\arraystretch}{0.9}
+			\setlength{\tabcolsep}{6pt}
+			
+			\rowcolors{2}{white}{lightblue} % alternate row colors
+			
+			\begin{tabular}{c c c}
+				\hline
+				\rowcolor{navyblue} % header row
+				\color{white}\textbf{Week} & 
+				\color{white}\textbf{Cost (x)} & 
+				\color{white}\textbf{Moving Range (MR)} \\
+				\hline
+				1  & 310 & -    \\
+				2  & 288 & 22   \\
+				3  & 297 & 9    \\
+				4  & 298 & 1    \\
+				5  & 307 & 9    \\
+				6  & 303 & 4    \\
+				7  & 294 & 9    \\
+				8  & 297 & 3    \\
+				9  & 308 & 11   \\
+				10 & 306 & 2    \\
+				11 & 294 & 12   \\
+				12 & 299 & 5    \\
+				13 & 297 & 2    \\
+				14 & 299 & 2    \\
+				15 & 314 & 15   \\
+				16 & 295 & 19   \\
+				17 & 293 & 2    \\
+				18 & 306 & 13   \\
+				19 & 301 & 5    \\
+				20 & 304 & 3    \\
+				\hline
+				\rowcolor{lightblue} 
+				 & $\bar{x} = 300.5$ &  $\overline{MR} = 7.79$ \\ 
+				\hline
+			\end{tabular}
+		\end{table}
+		
+		
+	\end{frame}
+	
+	\begin{frame}
+	   \centering  \textbf{\underline{Phase I - Establishing Trial Control Limits}}
+	   
+	   \vspace{0.5cm}
+		\begin{columns}[T] 
+			
+			% ---------------- LEFT COLUMN ----------------
+			\begin{column}{0.48\textwidth}
+				\footnotesize
+				\textbf{Individuals Control Chart}
+				
+				\vspace{0.05cm}
+				
+				
+					Monitor the stability of a process over time by plotting individual observations when subgrouping is not possible.
+					
+					\vspace{0.2cm}
+					
+				\begin{itemize}	
+					\item \textbf{Center Line:} Sample average cost of the 20 observations,
+					\[
+					\bar{x} = 300.5
+					\]
+					
+					\item \textbf{Control Limits:}
+					\[
+					\text{UCL} = \bar{x} + \frac{3\overline{MR}}{d_2} = 321.22
+					\]
+					\[
+					\text{LCL} = \bar{x} - \frac{3\overline{MR}}{d_2} = 279.78
+					\]
+				\end{itemize}
+			\end{column}
+			
+			% ---------------- VERTICAL LINE ----------------
+			\begin{column}{0.02\textwidth}
+				\vspace{-0.05cm} % adjust to match column height
+				\color{black}\rule{0.5pt}{6cm} % vertical line thickness & height
+			\end{column}
+			
+			% ---------------- RIGHT COLUMN ----------------
+			\begin{column}{0.48\textwidth}
+				\footnotesize
+				\textbf{Moving Range Control Chart}
+				
+				\vspace{0.05cm}
+				
+				
+					Monitor short-term process variability by plotting the range between consecutive individual observations.
+					
+					\vspace{0.2cm}
+				
+				\begin{itemize}		
+					\item \textbf{Center Line:} Average of the moving ranges of two observations, 
+					\[
+					\overline{MR} = 7.79
+					\]
+					
+					\item \textbf{Control Limits:}
+					\[
+					\text{UCL} = D_4 \overline{MR} = 25.45
+					\]
+					\[
+					\text{LCL} = D_3 \overline{MR} = 0
+					\]
+				\end{itemize}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.2cm}
+	\begin{itemize}
+		\item {\footnotesize
+			Moving range of $n = 2$ observations is used, therefore $D_3 = 0$, $D_4 = 3.267$, and $d_2 = 1.128$.
+		}	
+	\end{itemize}
+		
+	\end{frame}
+	
+	\begin{frame}[fragile]
+	\centering
+	\textbf{\underline{Control charts for individual observations on cost and for}}
+	\textbf{\underline{the moving range}}
+	 
+	
+		
+		\vspace{0.5cm}
+		
+		\begin{columns}[T]
+			
+			% ---------------- LEFT GRAPH ----------------
+			\begin{column}{0.48\textwidth}
+				\footnotesize
+				\includegraphics[width=\linewidth]{picture1.png}
+				\captionof{figure}{Control chart for individual observations on cost}
+				\label{fig:x_chart}
+			\end{column}
+			
+			% ---------------- RIGHT GRAPH ----------------
+			\begin{column}{0.48\textwidth}
+				\footnotesize
+				\includegraphics[width=\linewidth]{picture2.png}
+				\captionof{figure}{Control chart for the moving range}
+				\label{fig:x_chart}
+			\end{column}
+			
+		\end{columns}
+		
+		\begin{itemize}
+			\item {\footnotesize All 20 points (weeks 1-20) plot within the limits, meaning the process is stable and these limits can be used for Phase II monitoring.}	
+		\end{itemize}
+	\end{frame}
+	
+	
+	\begin{frame}
+		\centering  
+		\textbf{\underline{Phase II - Process Monitoring \& Interpretation}}
+		\vspace{0.5cm}
+		\scriptsize 
+		\begin{itemize}
+			\item This is a continuation of the Phase 1 control charts, monitoring Weeks 21–40 using the fixed control limits.
+		\end{itemize}
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.40\textwidth]{picture3.png}
+			\includegraphics[width=0.40\textwidth]{picture4.png}
+			\caption{Continuation of the control chart for individuals and the moving range using the data for weeks 21-40}
+			\label{fig:for_weeks_21_40}
+		\end{figure}
+		
+		\vspace{-0.5cm}
+		\scriptsize
+		\begin{itemize}
+			\item As this charts makes clear, an upward shift in cost has occurred around week 39, followed by another out-of-control signal at week 40 on the chart for individuals. 
+			\item The Moving Range chart reinforces this finding with a significant spike at week 39, which helps to identify exactly where a process shift in the mean has occurred.
+			\item An assignable cause should be investigated around Week 39.
+		\end{itemize}
+	\end{frame}
+	
+	
+	
+	\begin{frame}
+		\centering  
+		\textbf{\underline{Statistical Limitations: Correlation and Detection Power}}
+		\vspace{0.5cm}
+		\footnotesize 
+		\begin{itemize}
+			\item The moving ranges are correlated because they share a common data point ($MR_2$ uses $x_1, x_2$; $MR_3$ uses $x_2, x_3$), this may often induce a pattern of runs or cycles, therefore analysts must exercise caution and not over interpret these patterns as process shifts. 
+			\vspace{0.1cm}
+			\item In contrast, the individual observations plotted on the individuals chart are assumed to be uncorrelated. However, The ability of the individuals control chart to detect small shifts is very poor. 
+			\vspace{0.1cm}
+			\item For an individuals control chart with conventional three-sigma limits, we can compute the following:
+			
+			\definecolor{navyblue}{RGB}{5, 78, 100} % Header color
+			\definecolor{lightblue}{RGB}{224, 235, 255} % Alternate row color
+			
+			\begin{table}[h!]
+				\centering
+				
+				\caption{\fontsize{6}{8}\selectfont \textbf{Shift Size vs. Average Run Length (ARL)}}
+				\label{tab:shift_detection}
+				\vspace{-0.5cm}
+				\footnotesize
+				\renewcommand{\arraystretch}{0.9}
+				\setlength{\tabcolsep}{8pt}
+				\rowcolors{2}{white}{lightblue}
+				
+				\begin{tabular}{c c c}
+					\hline
+					\rowcolor{navyblue}
+					\color{white}\textbf{Size of Shift} & 
+					\color{white}\textbf{$\beta$} & 
+					\color{white}\textbf{ARL$_1$} \\
+					\hline
+					$1\sigma$ & 0.9772 & 43.96 \\
+					$2\sigma$ & 0.8413 & 6.30  \\
+					$3\sigma$ & 0.5000 & 2.00  \\
+					\hline
+				\end{tabular}
+			\end{table}
+			
+			\item If a shift in the process mean of about one standard deviation occurs, the information above tells us that it will take about 44 samples, on average, to detect the shift.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\centering  
+		\textbf{\underline{Normality Assumption}}
+		\vspace{0.5cm}
+		\footnotesize 
+		\begin{itemize}
+			\item These control charts assume that observations are normally distributed; the bank's data passed a crude check via a Normal Probability Plot.
+			
+			\vspace{0.35cm}
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.55\linewidth]{picture6.png}
+				\caption{Normal probability plot of cost data}
+				\label{fig:normal_plot}
+			\end{figure}
+			
+			\vspace{-0.7cm}
+			\item If data is non-normal, It will dramatically reduce the value of $\text{ARL}_0$ and increase the occurrence of the false alarms.
+			
+			\vspace{0.1cm}
+			\item Because of these limitations, It is suggested that Shewhart individuals chart be used with extreme caution, particularly in phase II monitoring.
+			\end{itemize}
+	\end{frame}
+	
+	% ------------------------------------------------
+	% Section 2.2
+	% ------------------------------------------------
+	\subsection{Example: The Use of Transformations }
+	
+	\begin{frame}{Example: The Use of Transformations}
+		\begin{itemize}
+			\item Process: Single-wafer semiconductor deposition.
+			\item Resistivity measurements of 25 silicon wafers.
+			\item Construct Individuals (I) and Moving Range (MR) control charts.
+	    \end{itemize}	
+	    	
+			
+				\begin{table}[h!]
+					\centering
+					\scriptsize
+					\caption{\fontsize{5}{6}\selectfont \textbf{Resistivity Data with Natural Logarithm and Moving Range}}
+					\label{tab:resistivity_data}
+					
+					\footnotesize
+					\renewcommand{\arraystretch}{0.8}
+					\setlength{\tabcolsep}{2pt}
+				
+				\rowcolors{2}{white}{lightblue}
+					
+					\begin{tabular}{c c c c c c c c}
+						% First table (Samples 1–13)
+						\begin{tabular}{c c c c}
+							\hline
+							\rowcolor{navyblue1}
+							\color{white}\textbf{\tiny Sample} & 
+							\color{white}\textbf{\tiny Resistivity} & 
+							\color{white}\textbf{\tiny $\ln(x_i)$} & 
+							\color{white}\textbf{\tiny MR} \\
+							\hline
+							\rowcolor{purpleBlueLight}
+							1  & 216 & 5.37528 & -       \\
+							2  & 290 & 5.66988 & 0.29460 \\
+							3  & 236 & 5.46383 & 0.20605 \\
+							4  & 228 & 5.42935 & 0.03448 \\
+							5  & 244 & 5.49717 & 0.06782 \\
+							6  & 210 & 5.34711 & 0.15006 \\
+							7  & 139 & 4.93447 & 0.41264 \\
+							8  & 310 & 5.73657 & 0.80210 \\
+							9  & 240 & 5.48064 & 0.25593 \\
+							10 & 211 & 5.35186 & 0.12878 \\
+							11 & 175 & 5.16479 & 0.18707 \\
+							12 & 447 & 6.10256 & 0.93777 \\
+							13 & 307 & 5.72685 & 0.37571 \\
+							\hline
+						\end{tabular}
+						\hspace{0.0cm}
+						% Second table (Samples 14–25)
+						\begin{tabular}{c c c c}
+							\hline
+							\rowcolor{navyblue1}
+							\color{white}\textbf{\tiny Sample} & 
+							\color{white}\textbf{\tiny Resistivity} & 
+							\color{white}\textbf{\tiny $\ln(x_i)$} & 
+							\color{white}\textbf{\tiny MR} \\
+							\hline
+							\rowcolor{purpleBlueLight}
+							14 & 242 & 5.48894 & 0.23791 \\
+							15 & 168 & 5.12396 & 0.36498 \\
+							16 & 360 & 5.88610 & 0.76214 \\
+							17 & 226 & 5.42053 & 0.46557 \\
+							18 & 253 & 5.53339 & 0.11286 \\
+							19 & 380 & 5.94017 & 0.40678 \\
+							20 & 131 & 4.87520 & 1.06497 \\
+							21 & 173 & 5.15329 & 0.27809 \\
+							22 & 224 & 5.41165 & 0.25836 \\
+							23 & 195 & 5.27300 & 0.13865 \\
+							24 & 199 & 5.29330 & 0.02030 \\
+							25 & 226 & 5.42053 & 0.12723 \\
+							\hline
+							\rowcolor{lightblue1}
+							\multicolumn{2}{c}{\textbf{\tiny Averages}} & 
+							\tiny $\overline{\ln(x_i)} = 5.44402$ & \tiny $\overline{MR}$ = 0.33712 \\
+							\hline
+						\end{tabular}
+					\end{tabular}
+				\end{table}
+	\end{frame}
+	
+	\begin{frame}
+		\centering  \textbf{\underline{Normality Check: Original Resistivity Data}
+			\vspace{0.8cm}}
+		
+		\begin{itemize}
+			\item Normal probability plot of resistivity shows right skewness.
+			
+			\vspace{0.5cm}
+			\item Normality assumption is not satisfied.
+			
+			\vspace{0.5cm}
+			\item Individuals control chart on original data is not appropriate.
+		\end{itemize}	
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.5\linewidth]{Picture8.png}
+				\caption{Normal probability plot of resistivity }
+				\label{fig:normal_plot_R1}
+			\end{figure}
+			
+	\end{frame}
+	
+	\begin{frame}
+		\centering  \textbf{\underline{Log Transformation}
+			\vspace{0.8cm}}
+		
+		\begin{itemize}
+			\item Applied natural logarithm. 
+			
+			\vspace{0.5cm}
+			\item Log transformation reduces skewness.
+			
+			\vspace{0.5cm}
+			\item Transformed data approximately follow a normal distribution.
+		\end{itemize}	
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.5\linewidth]{Picture9.png}
+			\caption{Normal probability plot of $\ln(resistivity)$ }
+			\label{fig:normal_plot_R2}
+		\end{figure}
+	\end{frame}
+	
+	\begin{frame}
+			\centering  \textbf{\underline{Control limits for the Individuals chart}
+			\vspace{0.8cm}}
+			
+		\begin{itemize}
+			\item $\text{UCL} = \overline{\ln(x_i)} + 3 \frac{\overline{MR}}{d_2} 
+			= 5.44402 + 3 (0.2989) = 6.3406$
+			
+			\vspace{1cm}
+			\item $\text{CL} = \overline{\ln(x_i)} = 5.44402$
+			
+			\vspace{1cm}
+			\item $\text{LCL} = \overline{\ln(x_i)} - 3 \frac{\overline{MR}}{d_2} 
+			= 5.44402 - 3 (0.2989) = 4.5474$
+		\end{itemize}
+		
+			\[
+		\hspace{3cm}	\text{Where } MR = |\ln(x_i) - \ln(x_{i-1})|, \quad d_2 = 1.128
+			\]
+	\end{frame}
+	
+	\begin{frame}
+		\centering  \textbf{\underline{Control limits for the Moving Range chart}
+			\vspace{0.8cm}}
+		
+		\begin{itemize}
+			\item $\text{UCL} = D_4 \, \overline{MR} = 3.267 \times 0.33712 = 1.1014$
+			
+			\vspace{1cm}
+			\item $\text{CL} = \overline{MR} = 0.33712$
+			
+			\vspace{1cm}
+			\item $\text{LCL} = D_3 \, \overline{MR} = 0$
+		\end{itemize}
+		
+		\vspace{1cm}
+		\noindent
+		\text Where For moving ranges with span 2: $D_3 = 0$, $D_4 = 3.267$.
+		
+	\end{frame}
+	
+	\begin{frame}
+		\centering  \textbf{\underline{Individuals and moving range control charts on $\ln (resistivity)$}
+			\vspace{0.8cm}}
+		
+		\begin{itemize}
+			\item No points outside control limits. 
+
+			\item Process is statistically in control.
+	
+			\item Example shows importance of
+			checking normality and using 
+			transformations.
+			
+		\end{itemize}	
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.5\linewidth]{Picture10.png}
+			\caption{Individuals and moving range control charts on $\ln(resistivity)$ }
+			\label{fig:Individuals and moving range}
+		\end{figure}
+	\end{frame}
+	
+	
+	\begin{frame}
+		\centering  \textbf{\underline{Methods of Estimating σ}
+			\vspace{0.8cm}}	
+		\begin{itemize}
+			\item From average moving range:
+			\[
+			\hat{\sigma}_1 = \frac{\overline{MR}}{d_2} = 0.8865 \, \overline{MR}, 
+			\quad \text{where for span = 2: } d_2 = 1.128
+			\]
+			
+			\item From sample standard deviation:
+			\[
+			\hat{\sigma}_2 = \frac{s}{c_4}
+			\]
+			
+			\item Both estimators are unbiased only if no assignable causes are present.
+		\end{itemize}
+		
+	\end{frame}
+	
+	
+	\begin{frame}
+		\centering  \textbf{\underline{Bias in $\sigma$ Estimation}
+			\vspace{0.8cm}}	
+		\begin{itemize}
+			\item Assignable causes cause bias in $\sigma$ estimates.
+			
+			\vspace{0.7cm}
+			\item A sustained shift in the process mean:
+			\vspace{0.5cm}
+			\begin{itemize}
+				\item The sample standard deviation is greatly affected.
+				
+				\vspace{0.5cm}
+				\item Moving range–based estimator is less affected since only one moving range changes.
+				
+			\end{itemize}
+			
+			\vspace{0.7cm}
+			\item Hence, moving range estimation is preferred when shifts may exist.
+			
+		\end{itemize}
+		
+	\end{frame}
+	
+	\begin{frame}
+		\centering  \textbf{\underline{Median Moving Range \& $𝐹^∗$  Statistic}
+			\vspace{0.8cm}}	
+		\begin{itemize}
+			\item To reduce bias, use the median of moving ranges.
+			
+			\subitem Median MR estimator:
+			\[
+			\hat{\sigma}_3 = \frac{\overline{MR}}{d_4} = 1.047\, \overline{MR}
+			\]
+			
+			\item Comparison of $\sigma$ estimators:
+			\[
+			F^{*} = \left( \frac{\hat{\sigma}_1}{\hat{\sigma}_2} \right)^2
+			\]
+			
+			\item Large values of $F^{*}$ indicate that the process may not be in control.
+		\end{itemize}
+	\end{frame}
+	
+	
+	\begin{frame}
+		\centering  \textbf{\underline{Span of the Moving Range}
+			\vspace{0.8cm}}	
+		\begin{itemize}
+			\item Moving ranges can be computed with different spans.
+			
+			\vspace{0.5cm}
+			\item Increasing the span:
+			
+			\vspace{0.35cm}
+			\begin{itemize}
+				\item Increases bias in $\sigma$ estimation.
+				
+				\vspace{0.35cm}
+				\item Causes more moving ranges to be affected by one out-of-control point.
+				
+				
+			\end{itemize}
+			
+			\vspace{0.5cm}
+			\item Span = 2 is recommended for Individuals charts.
+			
+			\vspace{0.5cm}
+			\item span = 2 gives the most reliable estimate of $\sigma$
+			
+			
+		\end{itemize}
+		
+	\end{frame}
+	
+	% ------------------------------------------------
+	% Final Topic Slide
+	% ------------------------------------------------
+	\section{References}
+	\begin{frame}{References}
+	\begin{enumerate}
+		\item Montgomery, D.C. (2009). Introduction to Statistical Quality Control. 6th ed. Hoboken, NJ: Wiley.
+		\vspace{0.5cm} 
+		\item StatPoint Technologies, Inc. (2013). X-Bar and S-Squared Charts. Rev. 9/16/2013. Statgraphics documentation.  
+	\end{enumerate}
+\end{frame}	
+	
+\section{End}	
+\begin{frame}{Thank You}
+	\centering
+	\Large \textbf{Thank You!} \\
+	\vspace{0.3cm}
+	\normalsize Questions and comments are welcome. \\
+	\vfill
+	\tiny{Prepared by Group 2 — Department of Statistics, University of Sri Jayewardenepura}
+	
+	\vspace{1cm}
+	\scriptsize{
+		\begin{tabular}{l l}
+			I.V.N.N. Wijesekara   & AS2022404 \\
+			K.C.H. Munasinghe     & AS2022528 \\
+			N.G.S. Minimuthu      & AS2022577 \\
+			K.V. Chandrasekara    & AS2022592 \\
+			Y.M.A.P. Rajapaksha   & AS2022642 \\
+		\end{tabular}
+	}
+	
+\end{frame}
+	
+\end{document}
